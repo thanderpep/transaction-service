@@ -1,0 +1,6 @@
+rootProject.name = 'transaction-service'
+include 'core'
+include 'usecase'
+include 'application'
+include 'infrastructure'
+
