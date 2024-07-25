@@ -77,14 +77,10 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
         }
     }
     
-    private void updateMccInTrasactionByMerchantName(Transaction transaction) throws TransactionException {
-        try {
+    private void updateMccInTrasactionByMerchantName(Transaction transaction) throws MerchantNotFoundException, TransactionException {
             Merchant merchant = findMerchantByNameUseCase.findByName(transaction.getMerchant());
             
             if (!isNull(merchant.getMccDefault()) && !merchant.getMccDefault().isBlank())
                 transaction.setMcc(merchant.getMccDefault());
-        } catch (MerchantNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

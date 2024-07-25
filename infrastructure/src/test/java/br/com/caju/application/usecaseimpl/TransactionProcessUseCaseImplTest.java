@@ -128,12 +128,12 @@ public class TransactionProcessUseCaseImplTest {
     
     @Test
     void processTransactionRequestSucessWithMccOfMerchant() throws UserNotFoundException, BenefitWalletNotFoundException, InsufficientBalanceException, MerchantNotFoundException {
-        Merchant mockMerchant = mockMerchant("9999");
+        Merchant mockMerchant = mockMerchant("5811");
         
         Transaction transaction = mockTransaction(
                 "123",
                 BigDecimal.TEN,
-                BenefitCategoryEnum.FOOD.getMccCodes().get(0),
+                BenefitCategoryEnum.FOOD.getMccCodes().get(0), //5411
                 mockMerchant.getName()
         );
         
@@ -148,7 +148,7 @@ public class TransactionProcessUseCaseImplTest {
         var category = ArgumentCaptor.forClass(BenefitCategoryEnum.class);
         verify(decreaseBalanceUseCase, times(1)).decreaseBalance(any(), category.capture(), any());
         
-        assertEquals(category.getValue(), BenefitCategoryEnum.CASH);
+        assertEquals(category.getValue(), BenefitCategoryEnum.MEAL);
         assertEquals(responseCodeEnum, ResponseCodeEnum.APPROVED);
     }
     
