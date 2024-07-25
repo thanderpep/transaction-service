@@ -4,7 +4,7 @@
 
 - O projeto não utiliza bibliotecas de conversão entre entidades como ModelMapper. Apesar do código ser mais verboso, ganhamos em simplicidade no entendimento e controle no processo de construção das entidades.
 
-- Um script com massa para testes esta localizado no diretório 
+- Um script `insert.sql` com massa para testes esta localizado no diretório resouces do modulo `infrastructure`
 
 ## Resposta da Questão Aberta L4
 
