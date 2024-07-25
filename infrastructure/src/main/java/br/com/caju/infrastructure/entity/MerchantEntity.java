@@ -2,6 +2,7 @@ package br.com.caju.infrastructure.entity;
 
 import br.com.caju.core.domain.enums.BusinessTypeEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class MerchantEntity {
     @Enumerated(EnumType.STRING)
     private BusinessTypeEnum businessType;
     
+    @Size(min = 4, max = 4)
     private String mccDefault;
     
     @Column(nullable = false)

@@ -1,6 +1,7 @@
 package br.com.caju.infrastructure.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class TransactionEntity {
     private BigDecimal amount;
     
     @Column(nullable = false)
+    @Size(min = 4, max = 4)
     private String mcc;
     
     @Column(nullable = false)
