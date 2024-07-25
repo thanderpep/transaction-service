@@ -25,7 +25,7 @@ public class ValidateBalanceUseCaseImpl implements ValidateBalanceUseCase {
         
             return benefitWallet.getBalance().compareTo(amount) >= 0;
         } catch (BenefitWalletNotFoundException e) {
-            //TODO log
+            System.out.println(e.getMessage());
         }
         return false;
     }

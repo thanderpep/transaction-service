@@ -34,6 +34,8 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
     @Override
     public ResponseCodeEnum processTransaction(Transaction transaction) {
         try {
+            transaction.validate();
+            
             User user = findUserByAccountIdUseCase.findByAccountId(transaction.getAccountId());
         
             // L3: Verifica se o comerciante tem um MCC preferencial, se positivo,
@@ -65,9 +67,11 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
             } else
                 throw new InsufficientBalanceException(ErrorCodeEnum.BW001.getMessage(), ErrorCodeEnum.BW001.getCode());
         } catch (InsufficientBalanceException e) {
+            System.out.println(e.getMessage());
             // Se o saldo não for suficiente, rejeita a transação
             return ResponseCodeEnum.INSUFFICIENT_BALANCE;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // Qualquer outro problema que impeça a transação de ser processada
             return ResponseCodeEnum.ERROR;
         }
@@ -80,7 +84,7 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
             if (!isNull(merchant.getMccDefault()) && !merchant.getMccDefault().isBlank())
                 transaction.setMcc(merchant.getMccDefault());
         } catch (MerchantNotFoundException e) {
-            //TODO logs
+            System.out.println(e.getMessage());
         }
     }
 }

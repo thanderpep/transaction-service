@@ -17,9 +17,6 @@ public class Transaction {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
-    public Transaction() {
-    }
-    
     public Transaction(Long id, String accountId, BigDecimal amount, String mcc, String merchant, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.accountId = accountId;
@@ -51,10 +48,8 @@ public class Transaction {
     }
     
     public void setAccountId(String accountId) throws TransactionException {
-        if (isNull(accountId) || accountId.isBlank())
-            throw new TransactionException(ErrorCodeEnum.TR002.getMessage(), ErrorCodeEnum.TR002.getCode());
-        
         this.accountId = accountId;
+        validate();
     }
     
     public BigDecimal getAmount() {
@@ -62,8 +57,8 @@ public class Transaction {
     }
     
     public void setAmount(BigDecimal amount) throws TransactionException {
-        amountIsValid(amount);
         this.amount = amount;
+        validate();
     }
     
     public String getMcc() {
@@ -71,8 +66,8 @@ public class Transaction {
     }
     
     public void setMcc(String mcc) throws TransactionException {
-        isMccValid(mcc);
         this.mcc = mcc;
+        validate();
     }
     
     public String getMerchant() {
@@ -80,10 +75,8 @@ public class Transaction {
     }
     
     public void setMerchant(String merchant) throws TransactionException {
-        if (isNull(merchant) || merchant.isBlank())
-            throw new TransactionException(ErrorCodeEnum.TR003.getMessage(), ErrorCodeEnum.TR003.getCode());
-        
         this.merchant = merchant;
+        validate();
     }
     
     public LocalDateTime getCreatedAt() {
@@ -122,12 +115,17 @@ public class Transaction {
         return result;
     }
     
-    private void isMccValid(String mcc) throws TransactionException {
+    
+    public void validate() throws TransactionException {
+        if (isNull(accountId) || accountId.isBlank())
+            throw new TransactionException(ErrorCodeEnum.TR002.getMessage(), ErrorCodeEnum.TR002.getCode());
+
+        if (isNull(merchant) || merchant.isBlank())
+            throw new TransactionException(ErrorCodeEnum.TR003.getMessage(), ErrorCodeEnum.TR003.getCode());
+
         if (isNull(mcc) || mcc.isBlank() || mcc.length() != 4)
             throw new TransactionException(ErrorCodeEnum.TR001.getMessage(), ErrorCodeEnum.TR001.getCode());
-    }
-    
-    private void amountIsValid(BigDecimal amount) throws TransactionException {
+
         if (isNull(amount) || amount.compareTo(BigDecimal.ZERO) <= 0)
             throw new TransactionException(ErrorCodeEnum.TR004.getMessage(), ErrorCodeEnum.TR004.getCode());
     }
