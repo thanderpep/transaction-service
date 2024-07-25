@@ -23,7 +23,6 @@
 - JUnit 5.8.1
 - Hibernate
 - H2 database
-- Flyway
 
 ### Bibliotecas Externas
 - Lombok
