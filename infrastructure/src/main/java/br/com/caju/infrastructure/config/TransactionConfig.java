@@ -20,8 +20,8 @@ public class TransactionConfig {
     }
 
     @Bean
-    public BalanceSufficientUseCase balanceSufficientUseCase(FindBenefitWalletByCategoryAndAccountIdGateway findBenefitWalletByCategoryAndAccountIdGateway){
-        return new BalanceSufficientUseCaseImpl(findBenefitWalletByCategoryAndAccountIdGateway);
+    public ValidateBalanceUseCase balanceSufficientUseCase(FindBenefitWalletByCategoryAndAccountIdGateway findBenefitWalletByCategoryAndAccountIdGateway){
+        return new ValidateBalanceUseCaseImpl(findBenefitWalletByCategoryAndAccountIdGateway);
     }
 
     @Bean
@@ -30,7 +30,7 @@ public class TransactionConfig {
     }
 
     @Bean
-    public TransactionProcessUseCase processTransactionUseCase(FindUserByAccountIdUseCase findUserByAccountIdUseCase, FindMerchantByNameUseCase findMerchantByNameUseCase, BalanceSufficientUseCase balanceSufficientUseCase, DecreaseBalanceUseCase decreaseBalanceUseCase, SaveTransactionGateway saveTransactionGateway){
-        return new TransactionProcessUseCaseImpl(findUserByAccountIdUseCase, findMerchantByNameUseCase, balanceSufficientUseCase, decreaseBalanceUseCase, saveTransactionGateway);
+    public TransactionProcessUseCase processTransactionUseCase(FindUserByAccountIdUseCase findUserByAccountIdUseCase, FindMerchantByNameUseCase findMerchantByNameUseCase, ValidateBalanceUseCase validateBalanceUseCase, DecreaseBalanceUseCase decreaseBalanceUseCase, SaveTransactionGateway saveTransactionGateway){
+        return new TransactionProcessUseCaseImpl(findUserByAccountIdUseCase, findMerchantByNameUseCase, validateBalanceUseCase, decreaseBalanceUseCase, saveTransactionGateway);
     }
 }

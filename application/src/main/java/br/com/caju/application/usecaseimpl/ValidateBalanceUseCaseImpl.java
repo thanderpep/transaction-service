@@ -5,15 +5,15 @@ import br.com.caju.core.domain.BenefitWallet;
 import br.com.caju.core.domain.enums.BenefitCategoryEnum;
 import br.com.caju.core.exception.BenefitWalletNotFoundException;
 import br.com.caju.core.exception.enums.ErrorCodeEnum;
-import br.com.caju.usecase.BalanceSufficientUseCase;
+import br.com.caju.usecase.ValidateBalanceUseCase;
 
 import java.math.BigDecimal;
 
-public class BalanceSufficientUseCaseImpl implements BalanceSufficientUseCase {
+public class ValidateBalanceUseCaseImpl implements ValidateBalanceUseCase {
     
     private FindBenefitWalletByCategoryAndAccountIdGateway findBenefitWalletByCategoryAndAccountIdGateway;
     
-    public BalanceSufficientUseCaseImpl(FindBenefitWalletByCategoryAndAccountIdGateway findBenefitWalletByCategoryAndAccountIdGateway) {
+    public ValidateBalanceUseCaseImpl(FindBenefitWalletByCategoryAndAccountIdGateway findBenefitWalletByCategoryAndAccountIdGateway) {
         this.findBenefitWalletByCategoryAndAccountIdGateway = findBenefitWalletByCategoryAndAccountIdGateway;
     }
     

@@ -19,14 +19,14 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
     
     private FindUserByAccountIdUseCase findUserByAccountIdUseCase;
     private FindMerchantByNameUseCase findMerchantByNameUseCase;
-    private BalanceSufficientUseCase balanceSufficientUseCase;
+    private ValidateBalanceUseCase validateBalanceUseCase;
     private DecreaseBalanceUseCase decreaseBalanceUseCase;
     private SaveTransactionGateway saveTransactionGateway;
     
-    public TransactionProcessUseCaseImpl(FindUserByAccountIdUseCase findUserByAccountIdUseCase, FindMerchantByNameUseCase findMerchantByNameUseCase, BalanceSufficientUseCase balanceSufficientUseCase, DecreaseBalanceUseCase decreaseBalanceUseCase, SaveTransactionGateway saveTransactionGateway) {
+    public TransactionProcessUseCaseImpl(FindUserByAccountIdUseCase findUserByAccountIdUseCase, FindMerchantByNameUseCase findMerchantByNameUseCase, ValidateBalanceUseCase validateBalanceUseCase, DecreaseBalanceUseCase decreaseBalanceUseCase, SaveTransactionGateway saveTransactionGateway) {
         this.findUserByAccountIdUseCase = findUserByAccountIdUseCase;
         this.findMerchantByNameUseCase = findMerchantByNameUseCase;
-        this.balanceSufficientUseCase = balanceSufficientUseCase;
+        this.validateBalanceUseCase = validateBalanceUseCase;
         this.decreaseBalanceUseCase = decreaseBalanceUseCase;
         this.saveTransactionGateway = saveTransactionGateway;
     }
@@ -47,14 +47,14 @@ public class TransactionProcessUseCaseImpl implements TransactionProcessUseCase 
         
             // L2: Fallback para CASH
             if (!benefitCategory.equals(BenefitCategoryEnum.CASH)) {
-                balanceSufficient = balanceSufficientUseCase.isBalanceSufficient(user.getAccountId(), benefitCategory, transaction.getAmount());
+                balanceSufficient = validateBalanceUseCase.isBalanceSufficient(user.getAccountId(), benefitCategory, transaction.getAmount());
             
                 if (!balanceSufficient)
                     benefitCategory = BenefitCategoryEnum.CASH;
             }
         
             if (benefitCategory.equals(BenefitCategoryEnum.CASH)) {
-                balanceSufficient = balanceSufficientUseCase.isBalanceSufficient(user.getAccountId(), benefitCategory, transaction.getAmount());
+                balanceSufficient = validateBalanceUseCase.isBalanceSufficient(user.getAccountId(), benefitCategory, transaction.getAmount());
             }
         
             // Tenta processar a transação com o tipo de saldo mapeado
