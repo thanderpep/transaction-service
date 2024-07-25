@@ -31,7 +31,7 @@ public class BenefitWalletMapper {
                 benefitWallet.getName(),
                 benefitWallet.getBalance(),
                 benefitWallet.getCategory(),
-                userMapper.toUserEntity(benefitWallet.getAccount()),
+                userMapper.toUserEntity(benefitWallet.getUser()),
                 benefitWallet.getCreatedAt(),
                 benefitWallet.getUpdatedAt()
         );

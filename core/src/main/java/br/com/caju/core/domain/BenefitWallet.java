@@ -51,6 +51,42 @@ public class BenefitWallet {
         return balance;
     }
     
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+    
+    public BenefitCategoryEnum getCategory() {
+        return category;
+    }
+    
+    public void setCategory(BenefitCategoryEnum category) {
+        this.category = category;
+    }
+    
+    public User getUser() {
+        return user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
     public void creditValue(BigDecimal value) {
         valueIsValid(value);
         this.balance = this.balance.add(value);
@@ -63,34 +99,6 @@ public class BenefitWallet {
             throw new InsufficientBalanceException(ErrorCodeEnum.BW001.getMessage(), ErrorCodeEnum.BW001.getCode());
     
         this.balance = this.balance.subtract(value);
-    }
-    
-    public BenefitCategoryEnum getCategory() {
-        return category;
-    }
-    
-    public void setCategory(BenefitCategoryEnum category) {
-        this.category = category;
-    }
-    
-    public User getAccount() {
-        return user;
-    }
-    
-    public void setAccount(User user) {
-        this.user = user;
-    }
-    
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-    
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-    
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
     
     private void valueIsValid(BigDecimal amount) {
