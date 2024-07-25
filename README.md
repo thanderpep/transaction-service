@@ -4,6 +4,8 @@
 
 - O projeto não utiliza bibliotecas de conversão entre entidades como ModelMapper. Apesar do código ser mais verboso, ganhamos em simplicidade no entendimento e controle no processo de construção das entidades.
 
+- Um script com massa para testes esta localizado no diretório 
+
 ## Resposta da Questão Aberta L4
 
 - **Transações simultâneas:** Dado que o mesmo cartão de crédito pode ser utilizado em diferentes serviços online, existe uma pequena mas existente probabilidade de ocorrerem duas transações ao mesmo tempo. O que você faria para garantir que apenas uma transação por conta fosse processada em um determinado momento? Esteja ciente do fato de que todas as solicitações de transação são síncronas e devem ser processadas rapidamente (menos de 100 ms), ou a transação atingirá o timeout.
@@ -21,6 +23,7 @@
 - JUnit 5.8.1
 - Hibernate
 - H2 database
+- Flyway
 
 ### Bibliotecas Externas
 - Lombok
