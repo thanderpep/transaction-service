@@ -10,7 +10,7 @@
 
 - **Transações simultâneas:** Dado que o mesmo cartão de crédito pode ser utilizado em diferentes serviços online, existe uma pequena mas existente probabilidade de ocorrerem duas transações ao mesmo tempo. O que você faria para garantir que apenas uma transação por conta fosse processada em um determinado momento? Esteja ciente do fato de que todas as solicitações de transação são síncronas e devem ser processadas rapidamente (menos de 100 ms), ou a transação atingirá o timeout.
 
-**Resposta:** Faria o uso de Locks.
+**Resposta:** Faria o uso de Locks pelo número da conta.
 1. Em um sistema de única instância, podemos considerar o uso de locks da própria linguagem Java, como `synchronized` e `ReentrantLock`, pois possuem um bom desempenho já que não envolvem comunicação de rede e sua implementação é simples.
 
 2. Para sistemas com alta concorrência, podemos considerar o uso de locks com Redis. São indicados para sincronização entre múltiplas instâncias e, se bem configurados e relativamente próximos dos servidores da aplicação, não terão uma latência adicional muito alta.
